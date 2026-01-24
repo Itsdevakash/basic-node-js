@@ -7,9 +7,9 @@ const b=20;
 // console.log(a+b);   
 
 
-// for(var a=1;a<=10;a++){
-//     console.log(a);
-// }
+for(var a=10;a<=10;a++){
+    console.log(a);
+}
 
 // if(a>b){
 //     console.log("a is greater");    
@@ -27,5 +27,5 @@ const b=20;
 
 
 
-var user = ["akasj","visak"];
-console.log(user.pop())
+// var user = ["akasj","visak"];
+// console.log(user.pop())
