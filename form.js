@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require("fs")
+const queryString = require('querystring');
 // http.createServer((req,resp)=>{
 //     resp.writeHead(200,{"content-type":"text/html"})
 
@@ -49,6 +50,23 @@ resp.writeHead(200,{"content-type":"text/html"})
 resp.write(data);
 
   }else if(req.url == "/submit"){
+    let dataBody = [];
+req.on("data",(chunk)=>{
+  dataBody.push(chunk);
+});
+
+req.on("end",()=>{
+  let rowData = Buffer.concat(dataBody).toString();
+  let readData = queryString.parse(rowData);
+  console.log(readData);
+
+})
+
+
+
+
+
+
     resp.write("Data Submitted !");
   }else{
     resp.write("Data Not Submitted !")
