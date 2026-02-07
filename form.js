@@ -60,6 +60,24 @@ req.on("end",()=>{
   let readData = queryString.parse(rowData);
   console.log(readData);
 
+  let dataString  ="MY Name Is "+readData.name;
+
+  fs.writeFileSync("text/"+readData.name+".txt",dataString);  //sync base
+
+  fs.writeFile("text/"+readData.name+".txt",dataString,(err)=>{  //async base
+    if(err){         
+           resp.writeHead(500,{"content-type":"text/plain"})
+            resp.write('internal server error')
+            resp.end();
+            return
+    }else{
+      console.log("Create file");
+    }
+
+
+
+  })
+
 })
 
 
