@@ -4,15 +4,34 @@ const fs = require('fs');
 
 http.createServer((req,resp)=>{
 
-    if(req.url == "/"){
-  fs.readFile("html/home.html",'utf-8',(err,data)=>{
+let collectheader = fs.readFileSync("html/header.html","utf-8");
+//   fs.readFile("html/header.html",'utf-8',(err,headerdata)=>{
+//     if(err){
+//         resp.writeHead(500,{"content-type":"text/plain"})
+//         resp.end("Server Error !");
+//         return false
+//     }
+
+//         collectheader=headerdata
+
+//   })
+
+let file ="/home";
+if(req.url !="/"){
+    file=req.url;
+}
+
+
+    if(req.url !== "/style.css"){
+
+  fs.readFile("html"+file+".html",'utf-8',(err,data)=>{
     if(err){
         resp.writeHead(500,{"content-type":"text/plain"})
         resp.end("Server Error !");
         return false
     }
 
-    resp.write(data);
+    resp.write(collectheader+""+data);
     resp.end();
 
   })
@@ -23,9 +42,8 @@ http.createServer((req,resp)=>{
         resp.end("Server Error !");
         return false
     }
-
-    resp.write(data);
-    resp.end();
+ resp.writeHead(200,{"content-type":"text/css"})
+    resp.end(data);
 
   })
 
